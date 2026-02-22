@@ -39,17 +39,43 @@ http://localhost:8081/webjars/swagger-ui/index.html
 | POST | `/api/v1/webhook/openclaw` | Webhook para eventos de OpenClaw |
 
 ## Arquitectura
+
+```mermaid
+graph LR
+    subgraph API["🌐 REST API"]
+        SC[SessionController]
+        WC[WebhookController]
+    end
+
+    subgraph App["⚙️ Application"]
+        SS[SessionService]
+        WS[WebhookService]
+    end
+
+    subgraph Domain["📦 Domain"]
+        S[Session]
+        MP[ModelPricing]
+        SR[SessionRepository]
+    end
+
+    subgraph Infra["🗄️ Infrastructure"]
+        DB[(PostgreSQL)]
+    end
+
+    SC --> SS
+    WC --> WS
+    WS --> SS
+    SS --> SR
+    SR --> DB
+    SS --> MP
+```
+
+### Paquetes
 ```
 com.arenita.tracking/
 ├── domain/          # Entidades y repositorios
-│   ├── model/       # Session, ModelPricing, enums
-│   └── repository/  # JPA repositories
 ├── application/     # Servicios de negocio
-│   ├── SessionService
-│   └── WebhookService
 ├── infrastructure/  # Web, config, persistence
-│   ├── web/         # Controllers REST
-│   └── config/      # DataSeeder, ExceptionHandler
 └── api/             # DTOs y mappers
 ```
 
