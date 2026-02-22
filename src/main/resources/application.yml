@@ -1,12 +1,11 @@
 server:
   port: 8081
-spring:
-  webflux:
-    base-path: /tracking
 
 spring:
   application:
     name: arenita-tracking
+  webflux:
+    base-path: /tracking
   jpa:
     open-in-view: false
     hibernate:
