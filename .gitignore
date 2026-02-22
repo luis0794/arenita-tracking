@@ -1,0 +1,14 @@
+build/
+.gradle/
+!gradle/wrapper/
+*.class
+*.jar
+*.war
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+.DS_Store
+*.log
+application-local.yml
